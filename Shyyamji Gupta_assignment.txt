@@ -1,0 +1,55 @@
+
+4:  As you seen below : After db port deleted Worker and resuilt pode become restarted and deletd pod again created  
+
+
+
+
+root@ip-172-31-0-77:~# kubectl get po
+NAME                      READY   STATUS    RESTARTS   AGE
+db-58cc845644-2r8bw       1/1     Running   0          8m48s
+redis-6878558678-5qq6v    1/1     Running   0          8m48s
+result-86bc6f7b5d-wd5zp   1/1     Running   0          8m48s
+vote-7d884dd585-4hfs4     1/1     Running   0          8m48s
+worker-6fc5d5b668-ck5x6   1/1     Running   0          8m48s
+root@ip-172-31-0-77:~# kubectl delete po vote-7d884dd585-4hfs4
+pod "vote-7d884dd585-4hfs4" deleted
+root@ip-172-31-0-77:~# kubectl get po
+NAME                      READY   STATUS    RESTARTS   AGE
+db-58cc845644-2r8bw       1/1     Running   0          11m
+redis-6878558678-5qq6v    1/1     Running   0          11m
+result-86bc6f7b5d-wd5zp   1/1     Running   0          11m
+vote-7d884dd585-hrl75     1/1     Running   0          2m18s
+worker-6fc5d5b668-ck5x6   1/1     Running   0          11m
+root@ip-172-31-0-77:~# kubectl delete po worker-6fc5d5b668-ck5x6
+pod "worker-6fc5d5b668-ck5x6" deleted
+root@ip-172-31-0-77:~# kubectl get po
+NAME                      READY   STATUS    RESTARTS   AGE
+db-58cc845644-2r8bw       1/1     Running   0          15m
+redis-6878558678-5qq6v    1/1     Running   0          15m
+result-86bc6f7b5d-wd5zp   1/1     Running   0          15m
+vote-7d884dd585-hrl75     1/1     Running   0          6m
+worker-6fc5d5b668-rgcjq   1/1     Running   0          40s
+root@ip-172-31-0-77:~# kubectl delete po db-58cc845644-2r8bw
+pod "db-58cc845644-2r8bw" deleted
+root@ip-172-31-0-77:~# kubectl get po
+NAME                      READY   STATUS    RESTARTS        AGE
+db-58cc845644-zshn7       1/1     Running   0               2m46s
+redis-6878558678-5qq6v    1/1     Running   0               19m
+result-86bc6f7b5d-wd5zp   1/1     Running   1 (2m16s ago)   19m
+vote-7d884dd585-hrl75     1/1     Running   0               9m51s
+worker-6fc5d5b668-rgcjq   1/1     Running   1 (2m16s ago)   4m31s
+root@ip-172-31-0-77:~# kubectl get po
+NAME                      READY   STATUS    RESTARTS        AGE
+db-58cc845644-zshn7       1/1     Running   0               3m21s
+redis-6878558678-5qq6v    1/1     Running   0               19m
+result-86bc6f7b5d-wd5zp   1/1     Running   1 (2m51s ago)   19m
+vote-7d884dd585-hrl75     1/1     Running   0               10m
+worker-6fc5d5b668-rgcjq   1/1     Running   1 (2m51s ago)   5m6s
+root@ip-172-31-0-77:~# kubectl get po
+NAME                      READY   STATUS    RESTARTS        AGE
+db-58cc845644-zshn7       1/1     Running   0               3m27s
+redis-6878558678-5qq6v    1/1     Running   0               20m
+result-86bc6f7b5d-wd5zp   1/1     Running   1 (2m57s ago)   20m
+vote-7d884dd585-hrl75     1/1     Running   0               10m
+worker-6fc5d5b668-rgcjq   1/1     Running   1 (2m57s ago)   5m12s
+root@ip-172-31-0-77:~#
